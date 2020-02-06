@@ -1,33 +1,34 @@
 import React, {memo, useState} from 'react';
 import {BottomNavigation, Text} from 'react-native-paper';
-
-const PhotoGallery = () => <Text>Music</Text>;
-const PhotoGallery1 = () => <Text>Music1</Text>;
-const PhotoGallery2 = () => <Text>Music2</Text>;
+import ExamScreen from '../screens/ExamScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 const Dashboard = () => {
   const [tab, setTab] = useState({
     index: 0,
     routes: [
-      {key: 'album', title: 'Album', icon: 'image-album', color: '#6200e1'},
-      {key: 'test', title: 'Album', icon: 'image-album', color: '#6100ee'},
-      {key: 'favorites', title: 'Favorites', icon: 'heart', color: '#00696b'},
+      {
+        key: 'exam',
+        title: 'EXAM',
+        icon: 'map-marker-radius',
+        color: '#3F51B5',
+      },
+
+      {key: 'profile', title: 'PROFILE', icon: 'account-circle'},
     ],
   });
 
   const _renderScene = BottomNavigation.SceneMap({
-    album: PhotoGallery,
-    favorites: PhotoGallery1,
-    test: PhotoGallery2,
+    exam: ExamScreen,
+    profile: ProfileScreen,
   });
-  const _onLoginPressed = (index: number) => {
-    console.log(index);
+  const _onTabPressed = (index: number) => {
     setTab({...tab, index: index});
   };
   return (
     <BottomNavigation
       navigationState={tab}
-      onIndexChange={_onLoginPressed}
+      onIndexChange={_onTabPressed}
       renderScene={_renderScene}
     />
   );
